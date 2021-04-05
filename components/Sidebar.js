@@ -10,10 +10,12 @@ import Chat from "../components/Chat";
 
 function Sidebar() {
   const [user] = useAuthState(auth);
+
   const userChatRef = db
     .collection("chats")
     .where("users", "array-contains", user.email);
-  const [chatSnapshot] = useCollection(userChatRef);
+
+  const [chatsSnapshot] = useCollection(userChatRef);
 
   const createChat = () => {
     const input = prompt("Please enter a valid email address to chat.");
@@ -31,17 +33,16 @@ function Sidebar() {
     }
   };
 
-  const chatAlreadyExist = (recipientEmail) => {
-    !!chatSnapshot?.doc.find(
+  const chatAlreadyExist = (recipientEmail) =>
+    !!chatsSnapshot?.docs.find(
       (chat) =>
         chat.data().users.find((user) => user === recipientEmail)?.length > 0
     );
-  };
 
   return (
     <Container>
       <Header>
-        <UserAvatar onClick={() => auth.signOut()} />
+        <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
 
         <IconContainer>
           <IconButton>
@@ -59,9 +60,9 @@ function Sidebar() {
       </Search>
       <SidebarButton onClick={createChat}>Start a new chat</SidebarButton>
 
-      {chatSnapshot?.docs.map((chat) => {
-        <Chat key={chat.id} id={chat.id} users={chat.data().users} />;
-      })}
+      {chatsSnapshot?.docs.map((chat) => (
+        <Chat key={chat.id} id={chat.id} users={chat.data().users} />
+      ))}
     </Container>
   );
 }
