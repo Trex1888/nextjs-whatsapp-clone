@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Head from "next/head";
-import Chat from "../components/Chat";
 import Sidebar from "../components/Sidebar";
 
 export default function Home() {
@@ -12,7 +11,6 @@ export default function Home() {
       </Head>
 
       <Sidebar />
-      {/* <Chat /> */}
     </Container>
   );
 }

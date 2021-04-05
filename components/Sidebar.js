@@ -70,9 +70,19 @@ function Sidebar() {
 export default Sidebar;
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 0.35;
+  flex: 0.4;
+  border-right: 1px solid whitesmoke;
+  height: 100vh;
+  min-width: 300px;
+  max-width: 350px;
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const Header = styled.div`

@@ -12,11 +12,11 @@ function Chat({ chat, messages }) {
   return (
     <Container>
       <Head>
-        <title>Chat with {getRecipientEmail(chat.user, user)} </title>
+        <title>Chat With {getRecipientEmail(chat.user, user)} </title>
       </Head>
       <Sidebar />
       <ChatContainer>
-        <ChatScreen chat={chat} messagees={messages} />
+        <ChatScreen chat={chat} messages={messages} />
       </ChatContainer>
     </Container>
   );
@@ -47,7 +47,6 @@ export async function getServerSideProps(context) {
     id: chatRes.id,
     ...chatRes.data(),
   };
-  console.log(chat, messages);
 
   return {
     props: {
